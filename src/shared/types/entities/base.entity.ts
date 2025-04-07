@@ -1,5 +1,10 @@
+import { IsBoolean, IsDate } from "class-validator";
+
 export abstract class  BaseEntity{
-    isActive: boolean;
-    createdAt: Date;
-    updatedAt: Date;
+    @IsBoolean()
+    isActive?: boolean;
+    @IsDate()
+    createdAt?: Date;
+    @IsDate()
+    updatedAt?: Date;
 }
