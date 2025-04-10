@@ -1,11 +1,8 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
+const config = {
   content: [
     "./src/presentation/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/presentation/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/presentation/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/presentation/styles/safelist.txt",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {

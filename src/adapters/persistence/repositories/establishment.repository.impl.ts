@@ -16,14 +16,9 @@ export class EstablishmentRepositoryImpl implements EstablishmentRepository {
     }
 
     async save(entity: EstablishmentEntity): Promise<EstablishmentEntity> {
-        try{
             const schema = EstablishmentMapper.toPersistence( entity );
             const result = await this.repository.save(schema); 
-            return EstablishmentMapper.toDomain(result);
-        } catch(error){
-            console.error("Error saving establishment:", error);
-            throw new Error("Failed to save establishment.");
-        }   
+            return EstablishmentMapper.toDomain(result);  
     }
     findAll(): Promise<EstablishmentEntity[]> {
         throw new Error("Method not implemented.");

@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="en">
       <body>
         <NavBar/>
         <main className="flex w-full py-4 pr-4">

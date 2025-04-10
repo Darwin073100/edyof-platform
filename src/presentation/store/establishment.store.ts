@@ -1,11 +1,26 @@
 import { create } from 'zustand';
-
+import { persist } from 'zustand/middleware';
+interface Establishment {
+    establishmentId?: string;
+    name: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
 interface State{
-    counter: number,
-    
+    establishment?: Establishment
+    setEstablishment: (data: Establishment) => void;
+    clearEstablishment:()=> void;
 }
 
-export const useCounterStore = create<State>()((set, get)=>({
-    counter: 0,
-    
-}))
+export const useEstablishmentStore = create<State>()(
+    persist(
+      (set) => ({
+        establishment: undefined,
+        setEstablishment: (data) => set({ establishment: data }),
+        clearEstablishment: () => set({ establishment: undefined }),
+      }),
+      {
+        name: 'establishment-storage', // clave que usará en localStorage
+      }
+    )
+  );

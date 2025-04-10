@@ -3,7 +3,21 @@ import { EstablishmentRepositoryImpl } from "@/adapters/persistence/repositories
 import { CreateEstablishmentUseCase } from "@/core/establishment/application/use-case/create.establishment.use-case"
 
 export async function createEstablishmentAction(name: string){
-    const establishmentRepository = await new EstablishmentRepositoryImpl().init();
-    const createEstablishmentUseCase = new CreateEstablishmentUseCase(establishmentRepository);
-    await createEstablishmentUseCase.create(name);
+    try{
+        const establishmentRepository = await new EstablishmentRepositoryImpl().init();
+        const createEstablishmentUseCase = new CreateEstablishmentUseCase(establishmentRepository);
+        const resp = await createEstablishmentUseCase.create(name);
+        return {
+            establishmentId: resp.establishmentId,
+            name: resp.name,
+            createdAt: resp.createdAt,
+            updatedAt: resp.updatedAt
+        };
+    } catch(error:any){
+        if(error?.code === '23505'){
+            return {
+                error: 'Ya existe un establecimiento con ese nombre'
+            }
+        }
+    }
 }

@@ -6,7 +6,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="en">
       <body
         className={`antialiased bg-gray-100`}
       >

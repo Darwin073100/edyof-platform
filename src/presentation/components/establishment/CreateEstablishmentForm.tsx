@@ -1,25 +1,41 @@
 'use client'
-import React, { startTransition, useState, useTransition } from 'react'
+import React, { startTransition, useEffect, useRef, useState, useTransition } from 'react'
 import { TextInput } from '../ui/inputs'
 import { Button } from '../ui/buttons'
 import { HiMiniArrowLongRight } from 'react-icons/hi2'
 import { createEstablishmentAction } from '@/adapters/http/actions/establishment/establishment.action'
+import { useEstablishmentStore } from '@/presentation/store/establishment.store'
+import { useRouter } from 'next/navigation'
+import { Spinner } from '../ui/spinners/Spinner'
+
 
 export const CreateEstablishmentForm = () => {
+    const { setEstablishment, establishment} = useEstablishmentStore();
     const [name, setName] = useState('');
-    const [isPending, setIsPending] = useTransition();
+    const [isPending, setIsPending] = useState(false);
     const [success, setSuccess] = useState(false);
+    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent)=>{
+        setIsPending(true);
         e.preventDefault();
         setSuccess(false);
 
         startTransition(async ()=>{
-            await createEstablishmentAction(name);
-            setName('');
-            setSuccess(true);
+            const resp = await createEstablishmentAction(name);
+ 
+            if(!!resp){
+                setSuccess(true);
+                router.push('/')
+                setIsPending(false);
+            }
         });
     }
+
+    useEffect(()=>{
+        
+    },[establishment]);
+
     return (
         <form onSubmit={ handleSubmit } className="bg-white p-8 rounded-xl shadow-md flex flex-col gap-4 max-w-[450px]">
             <h1 className="text-lg text-center">
@@ -36,11 +52,9 @@ export const CreateEstablishmentForm = () => {
             <Button
                 disabled={isPending}
                 type='submit' 
-                color="gray">
-                {isPending ? 'Cargando...' : 'Crear Establecimiento'}
-                <HiMiniArrowLongRight />
+                color="blue">
+                {isPending ? <Spinner/> : <>Siguiente<HiMiniArrowLongRight /></>}
             </Button>
-            {success && <p className="text-green-600">¡Establecimiento creado exitosamente!</p>}
         </form>
     )
 }
