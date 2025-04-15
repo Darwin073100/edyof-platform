@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import dotenv from 'dotenv';
-import { EstablishmentSchema } from '@/adapters/persistence/schemas/establishment.schema';
+import { EstablishmentSchema } from '@/core/establishment/adapters/persistence/schemas/establishment.schema';
 
 dotenv.config();
 

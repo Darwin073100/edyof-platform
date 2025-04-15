@@ -3,7 +3,7 @@ import { DataSource } from 'typeorm';
 import dotenv from 'dotenv';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { EstablishmentSchema } from '@/adapters/persistence/schemas/establishment.schema';
+import { EstablishmentSchema } from '@/core/establishment/adapters/persistence/schemas/establishment.schema';
 
 dotenv.config();
 

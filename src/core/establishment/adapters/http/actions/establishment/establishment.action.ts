@@ -1,5 +1,5 @@
 "use server"
-import { EstablishmentRepositoryImpl } from "@/adapters/persistence/repositories/establishment.repository.impl";
+import { EstablishmentRepositoryImpl } from "@/core/establishment/adapters/persistence/repositories/establishment.repository.impl";
 import { CreateEstablishmentUseCase } from "@/core/establishment/application/use-case/create.establishment.use-case"
 
 export async function createEstablishmentAction(name: string){
@@ -14,9 +14,11 @@ export async function createEstablishmentAction(name: string){
             updatedAt: resp.updatedAt
         };
     } catch(error:any){
+        console.log('-----------------Error codeeeeeee-------'+error.code);
         if(error?.code === '23505'){
             return {
-                error: 'Ya existe un establecimiento con ese nombre'
+                messageError: 'Ya existe un establecimiento con ese nombre',
+                code: 409
             }
         }
     }

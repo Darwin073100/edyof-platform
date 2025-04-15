@@ -24,7 +24,7 @@ export const SideBar = () => {
         <SideLink hover={hover} Icon={HiHome} href='/' value='Home'/>
         <SideLink hover={hover} Icon={HiMiniShoppingCart} href='/sale' value='Ventas'/>
         <SideLink hover={hover} Icon={HiMiniShoppingBag} href='#' value='Clientes'/>
-        <SideLink hover={hover} Icon={IoAddSharp} href='#' value='Sucursales'/>
+        <SideLink hover={hover} Icon={IoAddSharp} href='/branch-office' value='Sucursales'/>
         <SideLink hover={hover} Icon={HiRocketLaunch} href='#' value='Productos'/>
 
     </form>

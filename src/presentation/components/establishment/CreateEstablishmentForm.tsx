@@ -3,7 +3,7 @@ import React, { startTransition, useEffect, useRef, useState, useTransition } fr
 import { TextInput } from '../ui/inputs'
 import { Button } from '../ui/buttons'
 import { HiMiniArrowLongRight } from 'react-icons/hi2'
-import { createEstablishmentAction } from '@/adapters/http/actions/establishment/establishment.action'
+import { createEstablishmentAction } from '@/core/establishment/adapters/http/actions/establishment/establishment.action'
 import { useEstablishmentStore } from '@/presentation/store/establishment.store'
 import { useRouter } from 'next/navigation'
 import { Spinner } from '../ui/spinners/Spinner'
@@ -23,8 +23,8 @@ export const CreateEstablishmentForm = () => {
 
         startTransition(async ()=>{
             const resp = await createEstablishmentAction(name);
- 
-            if(!!resp){
+            console.log(resp);
+            if(resp?.name){
                 setSuccess(true);
                 router.push('/')
                 setIsPending(false);

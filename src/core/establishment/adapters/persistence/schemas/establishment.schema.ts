@@ -1,4 +1,4 @@
-import { BaseSchema } from "../../../infraestructure/database/base/base.schema.ts";
+import { BaseSchema } from "../../../../shared/persistence/base.schema.ts";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: 'establishment'})
